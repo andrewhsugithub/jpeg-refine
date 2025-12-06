@@ -63,6 +63,7 @@ jpegtran -optimize test.jpg > jpegtran_optimized.jpg
 > Note: I've set optimize flag to FALSE in `optimize.cpp`.
 
 <details>
+
 <summary>Huffman Table In-Depth Comparison Between Both Methods</summary>
 
 Below logs are printed using `print_huffman_tables` function in `optimize.cpp`.
@@ -85,14 +86,6 @@ huffval: 3 4 2 5 1 6 7 8 0 9 10
 
 **Difference**: None
 
-```diff
---- optimize.cpp
-+++ jpegtran -optimize
-@@
- bits:   0 2 2 3 1 1 1 1 0 0 0 0 0 0 0 0
- huffval: 3 4 2 5 1 6 7 8 0 9 10
-```
-
 ### AC Huffman Table for Component 0 (Y)
 
 **Using `optimize.cpp`**
@@ -109,16 +102,7 @@ bits: 0 2 1 3 3 2 5 2 4 3 5 5 6 5 0 11
 huffval: 1 2 3 0 4 17 5 18 33 6 49 7 19 34 65 81 97 113 8 20 50 129 35 145 161 21 66 82 177 193 22 51 98 114 209 9 36 67 130 225 240 23 83 146 162 241 37 52 99 115 53 38 68 131 178 194 84
 ```
 
-**Difference**:
-
-```diff
---- optimize.cpp
-+++ jpegtran -optimize
-@@
- bits: 0 2 1 3 3 2 5 2 4 3 5 5 6 5 0 11
--huffval: 1 2 3 0 4 17 5 18 33 6 49 7 19 34 65 81 97 113 8 20 50 129 35 145 161 21 66 82 177 193 22 51 98 114 209 9 36 67 130 225 240 52 83 146 162 241 23 37 99 115 38 53 68 84 131 178 194
-+huffval: 1 2 3 0 4 17 5 18 33 6 49 7 19 34 65 81 97 113 8 20 50 129 35 145 161 21 66 82 177 193 22 51 98 114 209 9 36 67 130 225 240 23 83 146 162 241 37 52 99 115 53 38 68 131 178 194 84
-```
+**Difference**: huffval differs slightly at the end.
 
 ### DC Huffman Table for Component 1, 2 (Cb/Cr)
 
@@ -138,14 +122,6 @@ huffval: 1 2 0 3 4 5 6 7 8
 
 **Difference**: None
 
-```diff
---- optimize.cpp
-+++ jpegtran -optimize
-@@
- bits: 0 2 3 1 1 1 1 0 0 0 0 0 0 0 0 0
- huffval: 1 2 0 3 4 5 6 7 8
-```
-
 ### AC Huffman Table for Component 1, 2 (Cb/Cr)
 
 **Using `optimize.cpp`**
@@ -164,16 +140,8 @@ huffval: 0 1 2 3 17 4 18 33 49 5 65 81 19 34 97 113 240 6 50 129 145 161 177 193
 
 **Difference**:
 
-```diff
---- optimize.cpp
-+++ jpegtran -optimize
-@@
--bits: 0 2 1 2 4 3 5 7 3 3 4 {-0 6 3 1-} 0
-+bits: 0 2 1 2 4 3 5 7 3 3 4 [+1 3 5 1+] 0
-@@
--huffval: 0 1 2 3 17 4 18 33 49 5 65 81 19 34 97 113 240 6 50 129 145 161 177 193 20 66 209 35 82 225 7 21 51 241 22 37 98 114 130 146 36 162 178 194
-+huffval: 0 1 2 3 17 4 18 33 49 5 65 81 19 34 97 113 240 6 50 129 145 161 177 193 20 66 209 35 82 225 7 21 51 241 22 114 130 146 36 37 98 162 178 194
-```
+- The `bits` differs slightly in the last four entries
+- The `huffval` has some differences towards the end
 
 Notice that both methods produce almost identical Huffman tables, with only minor differences in the AC table for components 1 and 2. This is likely due to different optimization algorithms used.
 
@@ -196,13 +164,11 @@ This program adjusts the quantization tables of a JPEG image to match the MPEG-4
 Zoomed-in comparison of images at the center of the flower:
 | Original (jpegtran -optimize) | Requantized (requantize.cpp) |
 | ----------------------------- | ---------------------------- |
-| | |
+| ![zoomed.png](zoomed.png) | ![zoomed_requant.png](zoomed_requant.png) |
+
+> Note: Both are screen cropped, hence the size difference, but the quality difference is visible. Zoom in yourself for better comparison.
 
 ## References
 
 - ISO/IEC 10918-1: https://www.w3.org/Graphics/JPEG/itu-t81.pdf Annex K.2 p.144-148
 - ISO/IEC 14496-2: http://wikil.lwwhome.cn:28080/wp-content/uploads/2018/06/ISO_IEC_14496-2_2004.pdf p.149
-
-```
-
-```
