@@ -39,8 +39,8 @@ make requantize
 
 ## Test Image
 
-Test image used: Canon EOS R sample image from DPReview
-![Test Image](https://www.dpreview.com/sample-galleries/0450281051/canon-eos-r-samples-gallery/0993198459)
+Test image used: [Canon EOS R sample image from DPReview](https://www.dpreview.com/sample-galleries/0450281051/canon-eos-r-samples-gallery/0993198459)
+![Test Image](https://1.img-dpreview.com/files/p/TS1200x900~sample_galleries/0450281051/0993198459.jpg)
 
 ## JPEG Huffman Table Optimization
 
@@ -166,7 +166,7 @@ Zoomed-in comparison of images at the center of the flower:
 | ----------------------------- | ---------------------------- |
 | ![zoomed.png](zoomed.png) | ![zoomed_requant.png](zoomed_requant.png) |
 
-> Note: Both are screen cropped, hence the size difference, but the quality difference is visible. Zoom in yourself for better comparison.
+> Note: Both are screen cropped by hand, hence the size difference, but the quality difference is visible. Zoom in yourself for better comparison.
 
 ## References
 
