@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Compiled objects and libraries
+*.o
+*.obj
+*.lo
+*.la
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+a.out
