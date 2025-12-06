@@ -23,7 +23,6 @@ static const int jpeg_natural_order[64] = {
     58, 59, 52, 45, 38, 31, 39, 46,
     53, 60, 61, 54, 47, 55, 62, 63};
 
-// Error handling boilerplate
 struct my_error_mgr {
     struct jpeg_error_mgr pub;
     jmp_buf setjmp_buffer;
